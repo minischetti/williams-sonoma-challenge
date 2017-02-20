@@ -136,6 +136,10 @@ nav {
     display: flex;
     flex-direction: column;
     width: 50%;
+
+    &:first-of-type {
+      margin-right: 5%;
+    }
   }
 }
 
@@ -189,14 +193,34 @@ button {
       border: 0;
     }
 
-    span {
+    label {
       font-size: 1.6rem;
       font-weight: 400;
       text-transform: uppercase;
-      padding: 1rem 0;
-      img {
-        padding: 0 1rem;
+      height: 4rem;
+      line-height: 4rem;
+      padding-left: 3rem;
+      position: relative;
+
+      &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background: url("../assets/arrow-collapsed.png") no-repeat;
+        width: 14px;
+        height: 14px;
       }
+
+      // img {
+      //   padding: 0 1rem;
+      //   transition: transform .25s ease;
+      //
+      //   &.collapsed {
+      //     transform: rotateZ(-90deg);
+      //   }
+      // }
     }
 
     p {
@@ -204,10 +228,14 @@ button {
     }
 
     .container {
+      transition: max-height 1s linear;
+      height: 0;
       overflow: hidden;
 
+
+
       &.collapsed {
-        height: 0;
+        max-height: 0;
       }
     }
   }
@@ -219,4 +247,27 @@ footer {
   height: 3rem;
   border-top: 1px solid rgba(0,0,0,.25);
   background-color: rgba(0,0,0,.1);
+}
+
+input[type=checkbox] {
+  -webkit-appearance: none;
+  display: none;
+  // width: 14px;
+  // height: 14px;
+  // background: url("../assets/arrow-collapsed.png") no-repeat;
+  // margin: auto 1rem;
+  // transition: 1s all ease;
+
+  &:checked {
+    transform: rotateZ(90deg);
+    transform-origin: center;
+  }
+}
+
+#a:checked ~ .container, #b:checked ~ .container, #c:checked ~ .container {
+  height: initial;
+}
+
+#a:checked ~ label:before, #b:checked ~ label:before, #c:checked ~ label:before {
+  background: url("../assets/arrow-expanded.png") no-repeat;
 }

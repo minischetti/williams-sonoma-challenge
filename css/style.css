@@ -96,6 +96,9 @@ nav a {
   flex-direction: column;
   width: 50%;
 }
+.content .half:first-of-type {
+  margin-right: 5%;
+}
 button {
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
@@ -140,23 +143,35 @@ button {
 .sections .section:last-child {
   border: 0;
 }
-.sections .section span {
+.sections .section label {
   font-size: 1.6rem;
   font-weight: 400;
   text-transform: uppercase;
-  padding: 1rem 0;
+  height: 4rem;
+  line-height: 4rem;
+  padding-left: 3rem;
+  position: relative;
 }
-.sections .section span img {
-  padding: 0 1rem;
+.sections .section label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: url("../assets/arrow-collapsed.png") no-repeat;
+  width: 14px;
+  height: 14px;
 }
 .sections .section p {
   margin: 0;
 }
 .sections .section .container {
+  transition: max-height 1s linear;
+  height: 0;
   overflow: hidden;
 }
 .sections .section .container.collapsed {
-  height: 0;
+  max-height: 0;
 }
 footer {
   position: absolute;
@@ -165,5 +180,23 @@ footer {
   height: 3rem;
   border-top: 1px solid rgba(0,0,0,0.25);
   background-color: rgba(0,0,0,0.1);
+}
+input[type=checkbox] {
+  -webkit-appearance: none;
+  display: none;
+}
+input[type=checkbox]:checked {
+  transform: rotateZ(90deg);
+  transform-origin: center;
+}
+#a:checked ~ .container,
+#b:checked ~ .container,
+#c:checked ~ .container {
+  height: initial;
+}
+#a:checked ~ label:before,
+#b:checked ~ label:before,
+#c:checked ~ label:before {
+  background: url("../assets/arrow-expanded.png") no-repeat;
 }
 /*# sourceMappingURL=style.css.map */
