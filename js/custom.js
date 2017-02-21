@@ -1,3 +1,4 @@
+
 var handlers = {
   decrementQuantity: function() {
     document.getElementById("quantity").stepDown(1);
@@ -67,6 +68,13 @@ var view = {
       }
     });
   },
+
+  openMenu: function() {
+    document.getElementById("burger").classList.toggle("active");
+    document.getElementById("nav").classList.toggle("active");
+    document.getElementById("dim").classList.toggle("active");
+  },
+
   updatePrice: function() {
     var currentQuantity = document.getElementById('quantity');
     // Change price based on product quantity
