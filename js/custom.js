@@ -26,3 +26,13 @@
 // };
 //
 // view.setUpEventListeners();
+
+// var currentQuantity = document.getElementById('quantity').value;
+// document.getElementById('price').innerHTML = currentQuantity;
+
+var currentQuantity = document.getElementById('quantity');
+
+currentQuantity.addEventListener('input', function()
+{
+    document.getElementById('price').innerHTML = '$' + Number(19.95 * currentQuantity.value).toFixed(2);
+});
