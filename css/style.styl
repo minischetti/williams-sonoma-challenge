@@ -93,11 +93,15 @@ h1 {
 
 body {
   font-family: 'Montserrat', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 1.2rem;
   margin: auto;
-  color: rgba(0,0,0,.75);
   line-height: 1.5;
+}
+
+p, li {
+  color: rgba(0,0,0,.75);
+  font-weight: 300;
 }
 
 #logo {
@@ -109,10 +113,9 @@ nav {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  margin: 2rem auto;
+  margin: 2rem auto 0;
   background-color: #343434;
   font-size: 1.1rem;
-  font-weight: 400;
   color: #fff;
 
     a {
@@ -124,6 +127,10 @@ nav {
       padding: 0 1rem;
       height: 3rem;
       line-height: 3rem;
+
+      &:last-child {
+        background-color: #293659;
+      }
     }
 }
 
@@ -144,6 +151,8 @@ nav {
 }
 
 button {
+  cursor: pointer;
+  outline: 0;
   display: flex;
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
@@ -197,7 +206,6 @@ button {
 
   .price {
     font-size: 1.8rem;
-    font-weight: 400;
     line-height: 4rem;
     text-align: center;
   }
@@ -210,6 +218,13 @@ button {
   .price, input, button {
     flex: 1;
     margin-right: 1rem;
+  }
+}
+
+.breadcrumbs {
+  margin: 2rem;
+  a:not(:last-child) {
+    color: rgba(0,0,0,.5);
   }
 }
 
@@ -231,7 +246,6 @@ button {
       cursor: pointer;
       user-select: none;
       font-size: 1.6rem;
-      font-weight: 400;
       text-transform: uppercase;
       height: 4rem;
       line-height: 4rem;
@@ -265,8 +279,13 @@ button {
   }
 }
 
+#imageContainer {
+  margin: auto;
+}
+
 .productImage {
   cursor: pointer;
+  width: 25%;
 }
 
 
@@ -293,4 +312,36 @@ input[type=checkbox] {
 // Rotate arrow via CSS transform based on section clicked
 #checkA:checked ~ label:before, #checkB:checked ~ label:before, #checkC:checked ~ label:before {
   transform: translateY(-50%) rotateZ(90deg);
+}
+
+#heroImage {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .content {
+    width: 90%;
+    flex-direction: column;
+
+    .half {
+      width: 100%;
+    }
+    #heroImage {
+      width: 50%;
+      height: auto;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      margin: 2rem 0;
+    }
+    .description {
+      display: none;
+    }
+  }
+}
+@media (max-width: 1440px) {
+  .content {
+    width: 90%;
+  }
 }

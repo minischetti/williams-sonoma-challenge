@@ -39,6 +39,10 @@ currentQuantity.addEventListener('input', function()
 
 var products = ["a", "b", "c", "d"];
 
+var a = {
+  name: "Black Stripe"
+};
+
 // Create Product Images
 function createImages() {
   for (i = 0; i < products.length; i++) {
@@ -59,11 +63,13 @@ function setUpEventListeners() {
     var elementClicked = event.target;
     // Toggle collapsed class on a per-container basis
     for (var i = 0; i < products.length; i++) {
-      if (elementClicked.className === 'productImage', this) {
+      if (elementClicked.className === 'productImage', this && elementClicked.id !== 'imageContainer') {
         document.getElementById("heroImage").src='assets/' + elementClicked.id + 'Large.jpg';
+        // document.getElementById("styleName").innerHTML='Williams-Sonoma Classic Apron, ' + elementClicked.id.name;
       }
     };
     console.log(elementClicked);
+    console.log(elementClickedName);
   });
 }
 // var view = {
