@@ -1,77 +1,52 @@
-var currentQuantity = document.getElementById('quantity');
+var handlers = {
+  decrementQuantity: function() {
+    document.getElementById("quantity").stepDown(1);
+    view.updatePrice();
+  },
+  incrementQuantity: function() {
+    document.getElementById("quantity").stepUp(1);
+    view.updatePrice();
+  },
+  showCart: function() {
+    var productFaded = document.getElementById("productFaded");
+    var cartInfo = document.getElementById('cartInfo');
+    var currentProduct = document.getElementById("heroImage").getAttribute('src');
+    var currentQuantity = document.getElementById('quantity');
 
-currentQuantity.addEventListener('input', function()
-{
-    document.getElementById('price').innerHTML = '$' + Number(19.95 * currentQuantity.value).toFixed(2);
-});
+    // Toggle dim div and cart modal
+    document.getElementById("dim").classList.toggle("active");
+    document.getElementById("cart").classList.toggle("active");
 
-function decrement() {
-  document.getElementById("quantity").stepDown(1);
-  document.getElementById('price').innerHTML = '$' + Number(19.95 * currentQuantity.value).toFixed(2);
-}
-function increment() {
-  document.getElementById("quantity").stepUp(1);
-  document.getElementById('price').innerHTML = '$' + Number(19.95 * currentQuantity.value).toFixed(2);
-}
+    // Match faded background to selected product
+    productFaded.src = currentProduct;
 
-function showCart() {
-  document.getElementById("dim").classList.toggle("active");
-  document.getElementById("cart").classList.toggle("active");
-
-  var productFaded = document.getElementById("productFaded");
-  var cartInfo = document.getElementById('cartInfo');
-  var currentProduct = document.getElementById("heroImage").getAttribute('src');
-
-  // Match faded background to selected product
-  productFaded.src = currentProduct;
-
-  // Set up correct pluralization of item depending on item count
-  if (currentQuantity.value === "1") {
-    cartInfo.innerHTML = "You've added " + currentQuantity.value + " item to your cart. Your total is $" + Number(19.95 * currentQuantity.value).toFixed(2) + '.';
-  } else {
-  cartInfo.innerHTML = "You've added " + currentQuantity.value + " items to your cart. Your total is $" + Number(19.95 * currentQuantity.value).toFixed(2) + '.';
+    // Set up correct pluralization of item depending on item count
+    if (currentQuantity.value === "1") {
+      cartInfo.innerHTML = "You've added " + currentQuantity.value + " item to your cart. Your total is $" + Number(19.95 * currentQuantity.value).toFixed(2) + '.';
+    } else {
+    cartInfo.innerHTML = "You've added " + currentQuantity.value + " items to your cart. Your total is $" + Number(19.95 * currentQuantity.value).toFixed(2) + '.';
+    }
   }
-}
-
-var products = ["a", "b", "c", "d"];
-
-var a = {
-  name: "French Blue"
-};
-var b = {
-  name: "Black Stripe"
-};
-var c = {
-  name: "Green Stripe"
-};
-var d = {
-  name: "Red"
 };
 
-// Create Product Images
-function createImages() {
-  for (i = 0; i < products.length; i++) {
-    var productImage = document.createElement('img');
+var view = {
+  setUpEventListeners: function() {
     var imageContainer = document.getElementById('imageContainer');
-    imageContainer.appendChild(productImage);
-    productImage.id = products[i];
-    productImage.className = 'productImage';
-    productImage.src = 'assets/' + products[i] + 'Small.jpg';
-  }
-}
-
-function setUpEventListeners() {
-  // Set variable for content div
-  var imageContainer = document.getElementById('imageContainer');
-  // Listen for clicks on entire div
-  imageContainer.addEventListener('click', function(event) {
-    var elementClicked = event.target;
-    // Toggle collapsed class on a per-container basis
-    for (var i = 0; i < products.length; i++) {
-      if (elementClicked.className === 'productImage', this && elementClicked.id !== 'imageContainer') {
-        document.getElementById("heroImage").src='assets/' + elementClicked.id + 'Large.jpg';
-      }
-    };
+    var products = ["a", "b", "c", "d"];
+    var a = { name: "French Blue" };
+    var b = { name: "Black Stripe" };
+    var c = { name: "Green Stripe" };
+    var d = { name: "Red" };
+    // Listen for clicks on imageContainer
+    imageContainer.addEventListener('click', function(event) {
+      var elementClicked = event.target;
+      // Change hero image to selected style
+      for (var i = 0; i < products.length; i++) {
+        if (elementClicked.className === 'productImage', this && elementClicked.id !== 'imageContainer') {
+          document.getElementById("heroImage").src='assets/' + elementClicked.id + 'Large.jpg';
+        }
+      };
+      // Change all mentions of current style to the one selected (breadcrumbs and title)
       switch (elementClicked.id) {
         case "a":
         document.getElementById("styleName").innerHTML='Williams-Sonoma Classic Apron, ' + a.name;
@@ -90,9 +65,28 @@ function setUpEventListeners() {
         document.getElementById("breadcrumbProduct").innerHTML='Williams-Sonoma Classic Apron, ' + d.name;
         break;
       }
-    console.log(elementClicked);
-  });
+    });
+  },
+  updatePrice: function() {
+    var currentQuantity = document.getElementById('quantity');
+    // Change price based on product quantity
+    document.getElementById('price').innerHTML = '$' + Number(19.95 * currentQuantity.value).toFixed(2);
+  },
+
+  // Create Product Images
+  createImages: function() {
+    var imageContainer = document.getElementById('imageContainer');
+    var products = ["a", "b", "c", "d"];
+    for (i = 0; i < products.length; i++) {
+      var productImage = document.createElement('img');
+      imageContainer.appendChild(productImage);
+      productImage.id = products[i];
+      productImage.className = 'productImage';
+      productImage.src = 'assets/' + products[i] + 'Small.jpg';
+    }
+  }
 }
 
-createImages();
-setUpEventListeners();
+
+view.setUpEventListeners();
+view.createImages();
