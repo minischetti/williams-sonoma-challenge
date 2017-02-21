@@ -213,10 +213,13 @@ button {
   input {
     text-align: center;
     flex: 0;
+    box-sizing: border-box;
   }
 
   .price, input, button {
     flex: 1;
+  }
+  .price, input {
     margin-right: 1rem;
   }
 }
@@ -337,6 +340,24 @@ input[type=checkbox] {
     }
     .description {
       display: none;
+    }
+
+    .actions {
+      flex-direction: column;
+      height: initial;
+    }
+
+    .price, input, button {
+      height: 4rem;
+      margin-bottom: 2rem;
+      margin-right: 0;
+    }
+
+    button {
+      margin-bottom: 0;
+      span {
+        margin: auto;
+      }
     }
   }
 }
