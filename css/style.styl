@@ -251,17 +251,25 @@ button {
       }
     }
 
-    p {
+    ul, p {
       margin: 0;
+      padding-bottom: 1rem;
     }
 
     .container {
       transition: max-height 1s linear;
       height: 0;
       overflow: hidden;
+      margin-left: 3rem;
     }
   }
 }
+
+.productImage {
+  cursor: pointer;
+}
+
+
 
 footer {
   position: absolute;
@@ -278,11 +286,11 @@ input[type=checkbox] {
 }
 
 // Open next container based on section title clicked
-#a:checked ~ .container, #b:checked ~ .container, #c:checked ~ .container {
+#checkA:checked ~ .container, #checkB:checked ~ .container, #checkC:checked ~ .container {
   height: initial;
 }
 
 // Rotate arrow via CSS transform based on section clicked
-#a:checked ~ label:before, #b:checked ~ label:before, #c:checked ~ label:before {
+#checkA:checked ~ label:before, #checkB:checked ~ label:before, #checkC:checked ~ label:before {
   transform: translateY(-50%) rotateZ(90deg);
 }
