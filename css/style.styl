@@ -5,40 +5,7 @@ accent=#1a8cff
 black05=rgba(0,0,0,.05)
 black10=rgba(0,0,0,.10)
 black25=rgba(0,0,0,.25)
-white05=rgba(255,255,255,.05)
-white10=rgba(255,255,255,.1)
-white25=rgba(255,255,255,.25)
-white50=rgba(255,255,255,.5)
-transitionTiming=cubic-bezier(0.68, -0.55, 0.265, 1.55)
 vendors=official
-skew=skewX(-10deg)
-
-// Fonts
-@font-face {
-  font-family: 'Proxima Nova Regular';
-  src: url('../fonts/ProximaNova-Regular.woff') format('woff');
-  src: url('../fonts/ProximaNova-Regular.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Proxima Nova Bold';
-  src: url('../fonts/ProximaNova-Bold.woff') format('woff');
-  src: url('../fonts/ProximaNova-Bold.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Proxima Nova Semibold';
-  src: url('../fonts/ProximaNova-Semibold.woff') format('woff');
-  src: url('../fonts/ProximaNova-Semibold.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Proxima Nova Light';
-  src: url('../fonts/ProximaNova-Light.woff') format('woff');
-  src: url('../fonts/ProximaNova-Light.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Proxima Nova Thin';
-  src: url('../fonts/ProximaNova-Thin.woff') format('woff');
-  src: url('../fonts/ProximaNova-Thin.woff2') format('woff2');
-}
 
 // Mixins
 fullWidth() {
@@ -46,23 +13,6 @@ fullWidth() {
   height: 100%;
 }
 
-
-noSelect() {
-  user-select: none;
-  pointer-events: none;
-}
-
-centerItem() {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.centerItem {
-  display: flex;
-  centerItem();
-}
 // General Styles
 ::selection {
   color: white;
@@ -163,6 +113,7 @@ button {
   text-transform: uppercase;
   white-space: nowrap;
   color: #fff;
+  height: 4rem;
 
   &:hover img {
     animation: pokeRight 1s infinite;
@@ -213,19 +164,104 @@ button {
   input {
     text-align: center;
     flex: 0;
+    margin: 0;
     box-sizing: border-box;
+    border: 0;
+    border-radius: 0;
+    outline: 0;
+    background-color: rgba(0,0,0,.15);
+  }
+
+  // Remove Default Chrome and Firefox Number Input Controls
+  input::-webkit-inner-spin-button, input::-webkit-outer-spin-button {
+     -webkit-appearance: none;
+      margin: 0;
+  }
+
+  input[type=number] {
+      -moz-appearance: textfield;
+  }
+
+  .productQuantity {
+    display: flex;
+    height: 4rem;
+
+    span {
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      width: 4rem;
+      background-color: rgba(0,0,0,.15);
+
+      &:first-of-type:hover img {
+        animation: 1s pokeDown ease infinite;
+      }
+
+      &:last-of-type:hover img {
+        animation: 1s pokeUp ease infinite;
+      }
+
+      img {
+        transform: rotateZ(90deg);
+      }
+
+      &:last-of-type img {
+        transform: rotateZ(-90deg);
+      }
+
+      img {
+        margin: auto;
+      }
+    }
   }
 
   .price, input, button {
     flex: 1;
   }
-  .price, input {
+  .price, .productQuantity span:last-of-type {
     margin-right: 1rem;
+  }
+}
+
+@keyframes pokeDown {
+  0% {
+    transform: rotateZ(90deg) translateX(0);
+  }
+  20% {
+    transform: rotateZ(90deg) translateX(25%);
+  }
+  40% {
+    transform: rotateZ(90deg) translateX(0%);
+  }
+  80% {
+    transform: rotateZ(90deg) translateX(25%);
+  }
+  100% {
+    transform: rotateZ(90deg) translateX(0%);
+  }
+}
+
+@keyframes pokeUp {
+  0% {
+    transform: rotateZ(-90deg) translateX(0);
+  }
+  20% {
+    transform: rotateZ(-90deg) translateX(25%);
+  }
+  40% {
+    transform: rotateZ(-90deg) translateX(0);
+  }
+  80% {
+    transform: rotateZ(-90deg) translateX(25%);
+  }
+  100% {
+    transform: rotateZ(-90deg) translateX(0);
   }
 }
 
 .breadcrumbs {
   margin: 2rem;
+
   a:not(:last-child) {
     color: rgba(0,0,0,.5);
   }
@@ -291,7 +327,14 @@ button {
   width: 25%;
 }
 
-
+#productFaded {
+  position: absolute;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+  opacity: .25;
+}
 
 footer {
   position: absolute;
@@ -321,6 +364,64 @@ input[type=checkbox] {
   width: 100%;
 }
 
+#dim {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,.75);
+  opacity: 0;
+  visibility: hidden;
+  transition: .5s all ease;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+#cart {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%,-50%);
+  width: 50%;
+  height: 50%;
+  background-color: white;
+  transition: .5s all ease;
+
+
+  &.active {
+    top: 50%;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .wrap, .wrap button {
+    margin: auto;
+  }
+
+  .backButton {
+    cursor: pointer;
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 1rem;
+    height: 4rem;
+    line-height: 4rem;
+
+    img {
+      display: block;
+      margin: auto 1rem;
+      transform: rotateZ(180deg);
+    }
+  }
+}
+
 @media (max-width: 768px) {
   .content {
     width: 90%;
@@ -329,15 +430,18 @@ input[type=checkbox] {
     .half {
       width: 100%;
     }
+
     #heroImage {
       width: 50%;
       height: auto;
       margin: auto;
     }
+
     h1 {
       text-align: center;
       margin: 2rem 0;
     }
+
     .description {
       display: none;
     }
@@ -347,14 +451,15 @@ input[type=checkbox] {
       height: initial;
     }
 
-    .price, input, button {
+    .price, .productQuantity input, .productQuantity span, button {
       height: 4rem;
-      margin-bottom: 2rem;
-      margin-right: 0;
+      margin: 0 !important;
     }
 
     button {
+      margin-top: 1rem !important;
       margin-bottom: 0;
+
       span {
         margin: auto;
       }

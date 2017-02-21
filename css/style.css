@@ -1,35 +1,3 @@
-@font-face {
-  font-family: 'Proxima Nova Regular';
-  src: url("../fonts/ProximaNova-Regular.woff") format('woff');
-  src: url("../fonts/ProximaNova-Regular.woff2") format('woff2');
-}
-@font-face {
-  font-family: 'Proxima Nova Bold';
-  src: url("../fonts/ProximaNova-Bold.woff") format('woff');
-  src: url("../fonts/ProximaNova-Bold.woff2") format('woff2');
-}
-@font-face {
-  font-family: 'Proxima Nova Semibold';
-  src: url("../fonts/ProximaNova-Semibold.woff") format('woff');
-  src: url("../fonts/ProximaNova-Semibold.woff2") format('woff2');
-}
-@font-face {
-  font-family: 'Proxima Nova Light';
-  src: url("../fonts/ProximaNova-Light.woff") format('woff');
-  src: url("../fonts/ProximaNova-Light.woff2") format('woff2');
-}
-@font-face {
-  font-family: 'Proxima Nova Thin';
-  src: url("../fonts/ProximaNova-Thin.woff") format('woff');
-  src: url("../fonts/ProximaNova-Thin.woff2") format('woff2');
-}
-.centerItem {
-  display: flex;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
 ::selection {
   color: #fff;
   background-color: #1a8cff;
@@ -56,11 +24,15 @@ h1 {
 }
 body {
   font-family: 'Montserrat', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 1.2rem;
   margin: auto;
-  color: rgba(0,0,0,0.75);
   line-height: 1.5;
+}
+p,
+li {
+  color: rgba(0,0,0,0.75);
+  font-weight: 300;
 }
 #logo {
   display: flex;
@@ -70,10 +42,9 @@ nav {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  margin: 2rem auto;
+  margin: 2rem auto 0;
   background-color: #343434;
   font-size: 1.1rem;
-  font-weight: 400;
   color: #fff;
 }
 nav a {
@@ -85,6 +56,9 @@ nav a {
   padding: 0 1rem;
   height: 3rem;
   line-height: 3rem;
+}
+nav a:last-child {
+  background-color: #293659;
 }
 .content {
   display: flex;
@@ -100,14 +74,30 @@ nav a {
   margin-right: 5%;
 }
 button {
+  cursor: pointer;
+  outline: 0;
+  display: flex;
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
+  font-size: 1.4rem;
   -webkit-appearance: none;
   border: 0;
   background-color: #eb1b19;
-  padding: 0 2.4rem;
-  color: #fff;
   text-transform: uppercase;
+  white-space: nowrap;
+  color: #fff;
+  height: 4rem;
+}
+button:hover img {
+  animation: pokeRight 1s infinite;
+}
+button span {
+  display: flex;
+  margin: auto 1rem;
+}
+button img {
+  margin: auto;
+  margin-left: 1rem;
 }
 .actions {
   display: flex;
@@ -115,20 +105,69 @@ button {
   height: 4rem;
   margin-bottom: 2rem;
 }
-.actions span {
+.actions .price {
   font-size: 1.8rem;
-  font-weight: 400;
   line-height: 4rem;
   text-align: center;
 }
 .actions input {
   text-align: center;
+  flex: 0;
+  margin: 0;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+  background-color: rgba(0,0,0,0.15);
 }
-.actions span,
+.actions input::-webkit-inner-spin-button,
+.actions input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.actions input[type=number] {
+  -moz-appearance: textfield;
+}
+.actions .productQuantity {
+  display: flex;
+  height: 4rem;
+}
+.actions .productQuantity span {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  width: 4rem;
+  background-color: rgba(0,0,0,0.15);
+}
+.actions .productQuantity span:first-of-type:hover img {
+  animation: 1s pokeDown ease infinite;
+}
+.actions .productQuantity span:last-of-type:hover img {
+  animation: 1s pokeUp ease infinite;
+}
+.actions .productQuantity span img {
+  transform: rotateZ(90deg);
+}
+.actions .productQuantity span:last-of-type img {
+  transform: rotateZ(-90deg);
+}
+.actions .productQuantity span img {
+  margin: auto;
+}
+.actions .price,
 .actions input,
 .actions button {
   flex: 1;
+}
+.actions .price,
+.actions .productQuantity span:last-of-type {
   margin-right: 1rem;
+}
+.breadcrumbs {
+  margin: 2rem;
+}
+.breadcrumbs a:not(:last-child) {
+  color: rgba(0,0,0,0.5);
 }
 .sections {
   border: 1px solid #000;
@@ -144,8 +183,9 @@ button {
   border: 0;
 }
 .sections .section label {
+  cursor: pointer;
+  user-select: none;
   font-size: 1.6rem;
-  font-weight: 400;
   text-transform: uppercase;
   height: 4rem;
   line-height: 4rem;
@@ -155,23 +195,39 @@ button {
 .sections .section label:before {
   content: "";
   position: absolute;
-  left: 0;
+  left: 1rem;
   top: 50%;
+  transition: 0.25s transform ease;
   transform: translateY(-50%);
-  background: url("../assets/arrow-collapsed.png") no-repeat;
-  width: 14px;
+  background: url("../assets/arrow.svg") no-repeat;
+  width: 7px;
   height: 14px;
 }
+.sections .section ul,
 .sections .section p {
   margin: 0;
+  padding-bottom: 1rem;
 }
 .sections .section .container {
   transition: max-height 1s linear;
   height: 0;
   overflow: hidden;
+  margin-left: 3rem;
 }
-.sections .section .container.collapsed {
-  max-height: 0;
+#imageContainer {
+  margin: auto;
+}
+.productImage {
+  cursor: pointer;
+  width: 25%;
+}
+#productFaded {
+  position: absolute;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+  opacity: 0.25;
 }
 footer {
   position: absolute;
@@ -182,21 +238,165 @@ footer {
   background-color: rgba(0,0,0,0.1);
 }
 input[type=checkbox] {
-  -webkit-appearance: none;
   display: none;
 }
-input[type=checkbox]:checked {
-  transform: rotateZ(90deg);
-  transform-origin: center;
-}
-#a:checked ~ .container,
-#b:checked ~ .container,
-#c:checked ~ .container {
+#checkA:checked ~ .container,
+#checkB:checked ~ .container,
+#checkC:checked ~ .container {
   height: initial;
 }
-#a:checked ~ label:before,
-#b:checked ~ label:before,
-#c:checked ~ label:before {
-  background: url("../assets/arrow-expanded.png") no-repeat;
+#checkA:checked ~ label:before,
+#checkB:checked ~ label:before,
+#checkC:checked ~ label:before {
+  transform: translateY(-50%) rotateZ(90deg);
+}
+#heroImage {
+  width: 100%;
+}
+#dim {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.75);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.5s all ease;
+}
+#dim.active {
+  opacity: 1;
+  visibility: visible;
+}
+#cart {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 50%;
+  background-color: #fff;
+  transition: 0.5s all ease;
+}
+#cart.active {
+  top: 50%;
+  opacity: 1;
+  visibility: visible;
+}
+#cart .wrap,
+#cart .wrap button {
+  margin: auto;
+}
+#cart .backButton {
+  cursor: pointer;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  height: 4rem;
+  line-height: 4rem;
+}
+#cart .backButton img {
+  display: block;
+  margin: auto 1rem;
+  transform: rotateZ(180deg);
+}
+@media (max-width: 768px) {
+  .content {
+    width: 90%;
+    flex-direction: column;
+  }
+  .content .half {
+    width: 100%;
+  }
+  .content #heroImage {
+    width: 50%;
+    height: auto;
+    margin: auto;
+  }
+  .content h1 {
+    text-align: center;
+    margin: 2rem 0;
+  }
+  .content .description {
+    display: none;
+  }
+  .content .actions {
+    flex-direction: column;
+    height: initial;
+  }
+  .content .price,
+  .content .productQuantity input,
+  .content .productQuantity span,
+  .content button {
+    height: 4rem;
+    margin: 0 !important;
+  }
+  .content button {
+    margin-top: 1rem !important;
+    margin-bottom: 0;
+  }
+  .content button span {
+    margin: auto;
+  }
+}
+@media (max-width: 1440px) {
+  .content {
+    width: 90%;
+  }
+}
+@keyframes pokeRight {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(25%);
+  }
+  40% {
+    transform: translateX(0%);
+  }
+  80% {
+    transform: translateX(25%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+@keyframes pokeDown {
+  0% {
+    transform: rotateZ(90deg) translateX(0);
+  }
+  20% {
+    transform: rotateZ(90deg) translateX(25%);
+  }
+  40% {
+    transform: rotateZ(90deg) translateX(0%);
+  }
+  80% {
+    transform: rotateZ(90deg) translateX(25%);
+  }
+  100% {
+    transform: rotateZ(90deg) translateX(0%);
+  }
+}
+@keyframes pokeUp {
+  0% {
+    transform: rotateZ(-90deg) translateX(0);
+  }
+  20% {
+    transform: rotateZ(-90deg) translateX(25%);
+  }
+  40% {
+    transform: rotateZ(-90deg) translateX(0);
+  }
+  80% {
+    transform: rotateZ(-90deg) translateX(25%);
+  }
+  100% {
+    transform: rotateZ(-90deg) translateX(0);
+  }
 }
 /*# sourceMappingURL=style.css.map */

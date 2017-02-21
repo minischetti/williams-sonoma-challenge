@@ -37,6 +37,32 @@ currentQuantity.addEventListener('input', function()
     document.getElementById('price').innerHTML = '$' + Number(19.95 * currentQuantity.value).toFixed(2);
 });
 
+function decrement() {
+  document.getElementById("quantity").stepDown(1);
+  document.getElementById('price').innerHTML = '$' + Number(19.95 * currentQuantity.value).toFixed(2);
+}
+function increment() {
+  document.getElementById("quantity").stepUp(1);
+  document.getElementById('price').innerHTML = '$' + Number(19.95 * currentQuantity.value).toFixed(2);
+}
+
+function showCart() {
+  document.getElementById("dim").classList.toggle("active");
+  document.getElementById("cart").classList.toggle("active");
+
+  var productFaded = document.getElementById("productFaded");
+  var cartInfo = document.getElementById('cartInfo');
+  var currentProduct = document.getElementById("heroImage").getAttribute('src');
+  
+  productFaded.src = currentProduct;
+
+  if (currentQuantity.value === "1"){
+    cartInfo.innerHTML = "You've added " + currentQuantity.value + " item to your cart. Your total is $" + Number(19.95 * currentQuantity.value).toFixed(2) + '.';
+  } else {
+  cartInfo.innerHTML = "You've added " + currentQuantity.value + " items to your cart. Your total is $" + Number(19.95 * currentQuantity.value).toFixed(2) + '.';
+  }
+}
+
 var products = ["a", "b", "c", "d"];
 
 var a = {

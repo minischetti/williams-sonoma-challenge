@@ -53,8 +53,12 @@
         </div>
         <div class="actions">
           <span id="price" class="price">$19.95</span>
-          <input type="number" name="quantity" id="quantity" min="1" placeholder="Quantity">
-          <button onclick="">
+          <div class="productQuantity">
+            <span onclick="decrement()"><img src="assets/arrow.svg"></span>
+            <input type="number" name="quantity" id="quantity" value="1" min="1" placeholder="Quantity">
+            <span onclick="increment()"><img src="assets/arrow.svg"></span>
+          </div>
+          <button onclick="showCart()">
             <span>Add to Cart<img src="assets/arrowWhite.svg"></span>
           </button>
         </div>
@@ -90,6 +94,17 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div id="dim"></div>
+    <div id="cart">
+      <img id="productFaded">
+      <span class="backButton" onclick="showCart()"><img src="assets/arrow.svg">Continue Shopping</span>
+      <div class="wrap">
+        <h1 id="cartInfo">You've added 4 items to your cart.</h1>
+        <button>
+          <span>Checkout<img src="assets/arrowWhite.svg"></span>
+        </button>
       </div>
     </div>
     <!--
