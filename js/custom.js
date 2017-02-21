@@ -1,35 +1,3 @@
-// var view = {
-//   displayTodos: function() {
-//     section = document.getElementsByClassName('section');
-//     section.forEach( function(todo, position) {
-//       section.appendChild('li');
-//     }, this);
-//   },
-//   setUpEventListeners: function () {
-//     // Set variable for content div
-//     var content = document.getElementById('content');
-//     // Listen for clicks on entire div
-//     content.addEventListener('click', function(event) {
-//       var elementClicked = event.target;
-//       // Set variable for collapsible containers
-//       container = document.getElementsByClassName('container');
-//       arrow = document.getElementsByClassName('arrow');
-//       // Toggle collapsed class on a per-container basis
-//         for (var i = 0; i < container.length; i++) {
-//           if (elementClicked.className === 'toggleSection', this) {
-//             container[i].classList.toggle('collapsed');
-//           }
-//         };
-//       console.log(elementClicked);
-//     });
-//   }
-// };
-//
-// view.setUpEventListeners();
-
-// var currentQuantity = document.getElementById('quantity').value;
-// document.getElementById('price').innerHTML = currentQuantity;
-
 var currentQuantity = document.getElementById('quantity');
 
 currentQuantity.addEventListener('input', function()
@@ -53,10 +21,12 @@ function showCart() {
   var productFaded = document.getElementById("productFaded");
   var cartInfo = document.getElementById('cartInfo');
   var currentProduct = document.getElementById("heroImage").getAttribute('src');
-  
+
+  // Match faded background to selected product
   productFaded.src = currentProduct;
 
-  if (currentQuantity.value === "1"){
+  // Set up correct pluralization of item depending on item count
+  if (currentQuantity.value === "1") {
     cartInfo.innerHTML = "You've added " + currentQuantity.value + " item to your cart. Your total is $" + Number(19.95 * currentQuantity.value).toFixed(2) + '.';
   } else {
   cartInfo.innerHTML = "You've added " + currentQuantity.value + " items to your cart. Your total is $" + Number(19.95 * currentQuantity.value).toFixed(2) + '.';
@@ -66,7 +36,16 @@ function showCart() {
 var products = ["a", "b", "c", "d"];
 
 var a = {
+  name: "French Blue"
+};
+var b = {
   name: "Black Stripe"
+};
+var c = {
+  name: "Green Stripe"
+};
+var d = {
+  name: "Red"
 };
 
 // Create Product Images
@@ -91,21 +70,29 @@ function setUpEventListeners() {
     for (var i = 0; i < products.length; i++) {
       if (elementClicked.className === 'productImage', this && elementClicked.id !== 'imageContainer') {
         document.getElementById("heroImage").src='assets/' + elementClicked.id + 'Large.jpg';
-        // document.getElementById("styleName").innerHTML='Williams-Sonoma Classic Apron, ' + elementClicked.id.name;
       }
     };
+      switch (elementClicked.id) {
+        case "a":
+        document.getElementById("styleName").innerHTML='Williams-Sonoma Classic Apron, ' + a.name;
+        document.getElementById("breadcrumbProduct").innerHTML='Williams-Sonoma Classic Apron, ' + a.name;
+        break;
+        case "b":
+        document.getElementById("styleName").innerHTML='Williams-Sonoma Classic Apron, ' + b.name;
+        document.getElementById("breadcrumbProduct").innerHTML='Williams-Sonoma Classic Apron, ' + b.name;
+        break;
+        case "c":
+        document.getElementById("styleName").innerHTML='Williams-Sonoma Classic Apron, ' + c.name;
+        document.getElementById("breadcrumbProduct").innerHTML='Williams-Sonoma Classic Apron, ' + c.name;
+        break;
+        case "d":
+        document.getElementById("styleName").innerHTML='Williams-Sonoma Classic Apron, ' + d.name;
+        document.getElementById("breadcrumbProduct").innerHTML='Williams-Sonoma Classic Apron, ' + d.name;
+        break;
+      }
     console.log(elementClicked);
-    console.log(elementClickedName);
   });
 }
-// var view = {
-//   displayTodos: function() {
-//     section = document.getElementsByClassName('section');
-//     section.forEach( function(todo, position) {
-//       section.appendChild('li');
-//     }, this);
-//   },
-// };
 
 createImages();
 setUpEventListeners();
