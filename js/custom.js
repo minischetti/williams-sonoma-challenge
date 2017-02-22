@@ -109,7 +109,6 @@ var view = {
   }
 }
 
-
 view.setUpEventListeners();
 view.checkEdge();
 view.clickLink();
