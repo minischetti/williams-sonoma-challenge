@@ -62,9 +62,9 @@
         <div class="actions">
           <span id="price" class="price">$19.95</span>
           <div class="productQuantity">
-            <span onclick="handlers.decrementQuantity()"><img src="assets/arrow.svg"></span>
+            <span id="decrementQuantity" onclick="handlers.decrementQuantity()"><img src="assets/arrow.svg"></span>
             <input onchange="view.updatePrice()" type="number" name="quantity" id="quantity" value="1" min="1" placeholder="Quantity">
-            <span onclick="handlers.incrementQuantity()"><img src="assets/arrow.svg"></span>
+            <span id="incrementQuantity" onclick="handlers.incrementQuantity()"><img src="assets/arrow.svg"></span>
           </div>
           <button onclick="handlers.toggleCart()">
             <span>Add to Cart<img src="assets/arrowWhite.svg"></span>

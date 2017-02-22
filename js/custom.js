@@ -19,8 +19,10 @@ var handlers = {
     // Set up correct pluralization of item depending on item count
     if (currentQuantity.value === "1") {
       cartInfo.innerHTML = "You've added " + currentQuantity.value + " item to your cart. Your total is $" + Number(19.95 * currentQuantity.value).toFixed(2) + '.';
-    } else {
+    } else if (currentQuantity.value > "1") {
     cartInfo.innerHTML = "You've added " + currentQuantity.value + " items to your cart. Your total is $" + Number(19.95 * currentQuantity.value).toFixed(2) + '.';
+    } else {
+    cartInfo.innerHTML = "You don't have any items in your cart.";
     }
   }
 };
@@ -98,10 +100,17 @@ var view = {
       productImage.className = 'productImage';
       productImage.src = 'assets/' + products[i] + 'Large.jpg';
     }
+  },
+  checkEdge: function() {
+    if (window.navigator.userAgent.indexOf("Edge") > -1) {
+      document.getElementById('decrementQuantity').style.display = "none";
+      document.getElementById('incrementQuantity').style.display = "none";
+    }
   }
 }
 
 
 view.setUpEventListeners();
+view.checkEdge();
 view.clickLink();
 view.createImages();
