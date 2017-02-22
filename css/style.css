@@ -30,6 +30,10 @@ body {
   line-height: 1.5;
   overflow-x: hidden;
 }
+button,
+input {
+  font-family: 'Montserrat', sans-serif;
+}
 p,
 li {
   color: rgba(0,0,0,0.75);
@@ -44,12 +48,13 @@ nav {
   flex-wrap: wrap;
   width: 100%;
   margin: 2rem auto 0;
-  background-color: #343434;
   font-size: 1.1rem;
+  font-weight: 500;
   color: #fff;
 }
 nav a {
-  flex: 1;
+  position: relative;
+  flex-grow: 1;
   margin: auto;
   text-transform: uppercase;
   text-align: center;
@@ -57,8 +62,40 @@ nav a {
   padding: 0 1rem;
   height: 3rem;
   line-height: 3rem;
+  transition: 0.25s all;
+  overflow: hidden;
 }
-nav a:last-child {
+nav a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #343434;
+  z-index: -1;
+}
+nav a::after {
+  transition: 0.25s all;
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255,255,255,0.9);
+  z-index: -1;
+}
+nav a:hover::after {
+  top: 0;
+}
+nav a:hover {
+  color: #000;
+}
+nav a:first-child {
+  margin-right: 1px;
+}
+nav a:first-child::before {
   background-color: #293659;
 }
 .burger-container {
@@ -126,7 +163,6 @@ button {
   cursor: pointer;
   outline: 0;
   display: flex;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   font-size: 1.4rem;
   -webkit-appearance: none;
@@ -167,6 +203,7 @@ button img {
   border: 0;
   border-radius: 0;
   outline: 0;
+  width: 100%;
   background-color: rgba(0,0,0,0.15);
 }
 .actions input::-webkit-inner-spin-button,
@@ -241,7 +278,7 @@ button img {
   padding-left: 3rem;
   position: relative;
 }
-.sections .section label:before {
+.sections .section label::before {
   content: "";
   position: absolute;
   left: 1rem;
@@ -269,10 +306,11 @@ button img {
   right: -100%;
   width: 40rem;
   padding: 2rem;
-  background-color: #293659;
+  background-color: rgba(41,54,89,0.9);
   color: #fff;
   transition: 1s all;
   box-sizing: border-box;
+  -webkit-backdrop-filter: blur(4px);
 }
 #notification.active {
   right: 2rem;
@@ -315,9 +353,9 @@ input[type=checkbox] {
 #checkC:checked ~ .container {
   height: initial;
 }
-#checkA:checked ~ label:before,
-#checkB:checked ~ label:before,
-#checkC:checked ~ label:before {
+#checkA:checked ~ label::before,
+#checkB:checked ~ label::before,
+#checkC:checked ~ label::before {
   transform: translateY(-50%) rotateZ(90deg);
 }
 #heroImage {
@@ -347,11 +385,10 @@ input[type=checkbox] {
   visibility: hidden;
   transform: translate(-50%, -50%);
   width: 100%;
-  height: 25%;
+  min-height: 25%;
   transition: 0.5s all;
-  background-color: #fff;
-  backdrop-filter: blur(4px);
-  background-color: #293659;
+  -webkit-backdrop-filter: blur(4px);
+  background-color: rgba(41,54,89,0.9);
 }
 #cart .wrap {
   padding: 2rem;
@@ -371,7 +408,13 @@ input[type=checkbox] {
 #cart .wrap button {
   margin: auto;
 }
-@media (max-width: 768px) {
+@media (orientation: landscape) {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+}
+@media (max-width: 1024px) {
+  #productFaded,
   .breadcrumbs {
     display: none;
   }
@@ -385,18 +428,26 @@ input[type=checkbox] {
     flex-direction: column;
     transition: 0.5s all;
     z-index: 2;
-    background-color: #fff;
     padding-top: 8rem;
+    background-color: #fff;
   }
   nav a {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex: 1;
     width: 100%;
-    padding: 0;
     height: initial;
+    padding: 0;
     color: #000;
+  }
+  nav a::before {
+    background-color: #fff;
+  }
+  nav a::after {
+    background-color: rgba(0,0,0,0.1);
+  }
+  nav a:first-child {
+    color: #fff;
   }
   nav.active {
     left: 0;
@@ -417,10 +468,7 @@ input[type=checkbox] {
     left: 0;
     transform: none;
     width: 100%;
-    height: 25%;
-  }
-  #cart #productFaded {
-    display: none;
+    min-height: 25%;
   }
   #cart.active {
     top: initial;
