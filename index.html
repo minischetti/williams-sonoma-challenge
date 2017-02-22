@@ -8,12 +8,10 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="assets/favicon.png" type="image/png">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
   </head>
   <body>
-    <span id="notification">Whoops, it seems you've clicked a link that doesn't go anywhere. Although this looks like a full site, it's actually not. Spooky.</span>
     <img id="logo" src="assets/logo.png">
     <div class="burger-container icon" onclick="view.openMenu()">
       <div id="burger">
@@ -104,7 +102,8 @@
         </div>
       </div>
     </div>
-    <div id="dim" onclick="handlers.toggleCart()"></div>
+    <span id="notification">Whoops, it seems you've clicked a link that doesn't go anywhere. Although this looks like a full site, it's actually not. Spooky.</span>
+    <div id="dim"></div>
     <div id="cart">
       <div class="wrap">
         <h1 id="cartInfo">You've added 4 items to your cart.</h1>

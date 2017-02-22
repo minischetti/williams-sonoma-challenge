@@ -223,6 +223,7 @@ button img {
 .actions .productQuantity span {
   cursor: pointer;
   user-select: none;
+  -moz-user-select: none;
   display: flex;
   width: 4rem;
   background-color: rgba(0,0,0,0.1);
@@ -273,6 +274,7 @@ button img {
 .sections .section label {
   cursor: pointer;
   user-select: none;
+  -moz-user-select: none;
   font-size: 1.6rem;
   text-transform: uppercase;
   height: 4rem;
@@ -308,7 +310,7 @@ button img {
   width: 40rem;
   padding: 2rem;
   color: #fff;
-  transition: 1s right;
+  transition: 1s all;
   box-sizing: border-box;
   -webkit-backdrop-filter: blur(4px);
   background-color: rgba(41,54,89,0.9);
