@@ -1,6 +1,6 @@
 ::selection {
   color: #fff;
-  background-color: #eb1b19;
+  background-color: #293659;
 }
 html,
 body {
@@ -18,6 +18,9 @@ html {
 h1 {
   font-family: 'Libre Baskerville', serif;
   font-size: 1.6rem;
+}
+a {
+  cursor: pointer;
 }
 body {
   font-family: 'Montserrat', sans-serif;
@@ -82,7 +85,7 @@ nav a:last-child {
   height: 0.1rem;
   background-color: #000;
   border-radius: 0.2rem;
-  transition: 0.25s ease;
+  transition: 0.25s all;
 }
 #burger span:nth-child(1) {
   top: 0;
@@ -186,10 +189,10 @@ button img {
   background-color: rgba(0,0,0,0.15);
 }
 .actions .productQuantity span:first-of-type:hover img {
-  animation: 1s pokeDown ease infinite;
+  animation: 1s pokeDown infinite;
 }
 .actions .productQuantity span:last-of-type:hover img {
-  animation: 1s pokeUp ease infinite;
+  animation: 1s pokeUp infinite;
 }
 .actions .productQuantity span img {
   transform: rotateZ(90deg);
@@ -243,7 +246,7 @@ button img {
   position: absolute;
   left: 1rem;
   top: 50%;
-  transition: 0.25s transform ease;
+  transition: 0.25s transform;
   transform: translateY(-50%);
   background: url("../assets/arrow.svg") no-repeat;
   width: 7px;
@@ -259,6 +262,20 @@ button img {
   height: 0;
   overflow: hidden;
   margin-left: 3rem;
+}
+#notification {
+  position: fixed;
+  bottom: 2rem;
+  right: -100%;
+  width: 40rem;
+  padding: 2rem;
+  background-color: #293659;
+  color: #fff;
+  transition: 1s all;
+  box-sizing: border-box;
+}
+#notification.active {
+  right: 2rem;
 }
 #imageContainer {
   margin: 0 auto auto;
@@ -285,9 +302,10 @@ footer {
   color: rgba(0,0,0,0.5);
   border-top: 1px solid rgba(0,0,0,0.25);
   background-color: rgba(0,0,0,0.1);
+  z-index: -1;
 }
 footer span {
-  color: #eb1b19;
+  color: #293659;
 }
 input[type=checkbox] {
   display: none;
@@ -314,7 +332,7 @@ input[type=checkbox] {
   background-color: rgba(0,0,0,0.75);
   opacity: 0;
   visibility: hidden;
-  transition: 0.5s all ease;
+  transition: 0.5s opacity;
 }
 #dim.active {
   opacity: 1;
@@ -322,39 +340,33 @@ input[type=checkbox] {
 }
 #cart {
   display: flex;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 50%;
   opacity: 0;
   visibility: hidden;
   transform: translate(-50%, -50%);
-  width: 50%;
-  height: 50%;
+  width: 100%;
+  height: 25%;
+  transition: 0.5s all;
   background-color: #fff;
-  transition: 0.5s all ease;
+  backdrop-filter: blur(4px);
+  background-color: #293659;
+}
+#cart h1 {
+  color: #fff;
 }
 #cart.active {
   top: 50%;
   opacity: 1;
   visibility: visible;
 }
+#cart button {
+  padding: 0 2rem;
+}
 #cart .wrap,
 #cart .wrap button {
   margin: auto;
-}
-#cart .backButton {
-  cursor: pointer;
-  display: flex;
-  position: absolute;
-  top: 0;
-  left: 1rem;
-  height: 4rem;
-  line-height: 4rem;
-}
-#cart .backButton img {
-  display: block;
-  margin: auto 1rem;
-  transform: rotateZ(180deg);
 }
 @media (max-width: 768px) {
   .breadcrumbs {
@@ -368,7 +380,7 @@ input[type=checkbox] {
     top: 0;
     margin: 0;
     flex-direction: column;
-    transition: 0.5s all ease;
+    transition: 0.5s all;
     z-index: 2;
     background-color: #fff;
     padding-top: 8rem;
@@ -386,9 +398,40 @@ input[type=checkbox] {
   nav.active {
     left: 0;
   }
-  #cart {
+  #notification {
+    position: fixed;
+    z-index: 3;
     width: 100%;
-    height: 100%;
+    left: 0;
+    bottom: -100%;
+  }
+  #notification.active {
+    bottom: 0;
+  }
+  #cart {
+    top: initial;
+    bottom: -100%;
+    left: 0;
+    transform: none;
+    width: 100%;
+    height: 25%;
+  }
+  #cart #productFaded {
+    display: none;
+  }
+  #cart.active {
+    top: initial;
+    bottom: 0;
+  }
+  #cart h1 {
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 0 1rem;
+  }
+  #cart button {
+    display: block;
+    width: 100%;
+    text-align: center;
   }
   .burger-container {
     visibility: visible;

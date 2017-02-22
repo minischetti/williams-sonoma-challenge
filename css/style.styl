@@ -1,7 +1,7 @@
 // out: style.css, sourcemap: true, nib: true
 
 // Variables
-accent=#eb1b19
+accent=#293659
 black05=rgba(0,0,0,.05)
 black10=rgba(0,0,0,.10)
 black25=rgba(0,0,0,.25)
@@ -37,6 +37,10 @@ html {
 h1 {
   font-family: 'Libre Baskerville', serif;
   font-size: 1.6rem;
+}
+
+a {
+  cursor: pointer;
 }
 
 body {
@@ -78,7 +82,7 @@ nav {
     line-height: 3rem;
 
     &:last-child {
-      background-color: #293659;
+      background-color: accent;
     }
   }
 }
@@ -109,7 +113,7 @@ nav {
     height: .1rem;
     background-color: #000;
     border-radius: .2rem;
-    transition: .25s ease;
+    transition: .25s all;
 
     &:nth-child(1) {
       top: 0;
@@ -171,7 +175,7 @@ button {
   font-size: 1.4rem;
   -webkit-appearance: none;
   border: 0;
-  background-color: accent;
+  background-color: #eb1b19;
   text-transform: uppercase;
   white-space: nowrap;
   color: #fff;
@@ -256,11 +260,11 @@ button {
       background-color: rgba(0,0,0,.15);
 
       &:first-of-type:hover img {
-        animation: 1s pokeDown ease infinite;
+        animation: 1s pokeDown infinite;
       }
 
       &:last-of-type:hover img {
-        animation: 1s pokeUp ease infinite;
+        animation: 1s pokeUp infinite;
       }
 
       img {
@@ -358,7 +362,7 @@ button {
         position: absolute;
         left: 1rem;
         top: 50%;
-        transition: .25s transform ease;
+        transition: .25s transform;
         transform: translateY(-50%);
         background: url("../assets/arrow.svg") no-repeat;
         width: 7px;
@@ -377,6 +381,22 @@ button {
       overflow: hidden;
       margin-left: 3rem;
     }
+  }
+}
+
+#notification {
+  position: fixed;
+  bottom: 2rem;
+  right: -100%;
+  width: 40rem;
+  padding: 2rem;
+  background-color: accent;
+  color: #fff;
+  transition: 1s all;
+  box-sizing: border-box;
+
+  &.active {
+    right: 2rem;
   }
 }
 
@@ -408,6 +428,7 @@ footer {
   color: rgba(0,0,0,.5);
   border-top: 1px solid rgba(0,0,0,.25);
   background-color: rgba(0,0,0,.1);
+  z-index: -1;
 
   span {
     color: accent;
@@ -442,7 +463,7 @@ input[type=checkbox] {
   background-color: rgba(0,0,0,.75);
   opacity: 0;
   visibility: hidden;
-  transition: .5s all ease;
+  transition: .5s opacity;
 
   &.active {
     opacity: 1;
@@ -452,17 +473,22 @@ input[type=checkbox] {
 
 #cart {
   display: flex;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 50%;
   opacity: 0;
   visibility: hidden;
   transform: translate(-50%,-50%);
-  width: 50%;
-  height: 50%;
+  width: 100%;
+  height: 25%;
+  transition: .5s all;
   background-color: white;
-  transition: .5s all ease;
+  backdrop-filter: blur(4px);
+  background-color: accent;
 
+  h1 {
+    color: #fff;
+  }
 
   &.active {
     top: 50%;
@@ -470,24 +496,12 @@ input[type=checkbox] {
     visibility: visible;
   }
 
-  .wrap, .wrap button {
-    margin: auto;
+  button {
+    padding: 0 2rem;
   }
 
-  .backButton {
-    cursor: pointer;
-    display: flex;
-    position: absolute;
-    top: 0;
-    left: 1rem;
-    height: 4rem;
-    line-height: 4rem;
-
-    img {
-      display: block;
-      margin: auto 1rem;
-      transform: rotateZ(180deg);
-    }
+  .wrap, .wrap button {
+    margin: auto;
   }
 }
 
@@ -505,7 +519,7 @@ input[type=checkbox] {
     top: 0;
     margin: 0;
     flex-direction: column;
-    transition: .5s all ease;
+    transition: .5s all;
     z-index: 2;
     background-color: #fff;
     padding-top: 8rem
@@ -526,9 +540,46 @@ input[type=checkbox] {
     }
   }
 
-  #cart {
+  #notification {
+    position: fixed;
+    z-index: 3;
     width: 100%;
-    height: 100%;
+    left: 0;
+    bottom: -100%;
+
+    &.active {
+      bottom: 0;
+    }
+  }
+
+  #cart {
+    top: initial;
+    bottom: -100%;
+    left: 0;
+    transform: none;
+    width: 100%;
+    height: 25%;
+
+    #productFaded {
+      display: none;
+    }
+
+    &.active {
+      top: initial;
+      bottom: 0;
+    }
+
+    h1 {
+      font-size: 1.2rem;
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
   }
 
   .burger-container {
