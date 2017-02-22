@@ -278,7 +278,7 @@ button img {
   right: 2rem;
 }
 #imageContainer {
-  margin: 0 auto auto;
+  margin: 2rem auto auto;
 }
 .productImage {
   cursor: pointer;
@@ -352,6 +352,9 @@ input[type=checkbox] {
   background-color: #fff;
   backdrop-filter: blur(4px);
   background-color: #293659;
+}
+#cart .wrap {
+  padding: 2rem;
 }
 #cart h1 {
   color: #fff;

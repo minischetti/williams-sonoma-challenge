@@ -1,4 +1,3 @@
-
 var handlers = {
   decrementQuantity: function() {
     document.getElementById("quantity").stepDown(1);
@@ -8,8 +7,7 @@ var handlers = {
     document.getElementById("quantity").stepUp(1);
     view.updatePrice();
   },
-  showCart: function() {
-    var productFaded = document.getElementById("productFaded");
+  toggleCart: function() {
     var cartInfo = document.getElementById('cartInfo');
     var currentProduct = document.getElementById("heroImage").getAttribute('src');
     var currentQuantity = document.getElementById('quantity');
@@ -17,9 +15,6 @@ var handlers = {
     // Toggle dim div and cart modal
     document.getElementById("dim").classList.toggle("active");
     document.getElementById("cart").classList.toggle("active");
-
-    // Match faded background to selected product
-    productFaded.src = currentProduct;
 
     // Set up correct pluralization of item depending on item count
     if (currentQuantity.value === "1") {
@@ -69,6 +64,17 @@ var view = {
     });
   },
 
+  clickLink: function() {
+    document.body.addEventListener('click', function(event) {
+      if (event.target.localName === "a") {
+        document.getElementById("notification").classList.add("active");
+        setTimeout(function() {
+          document.getElementById("notification").classList.remove("active");
+        }, 6000);
+      }
+    });
+  },
+
   openMenu: function() {
     document.getElementById("burger").classList.toggle("active");
     document.getElementById("nav").classList.toggle("active");
@@ -90,11 +96,12 @@ var view = {
       imageContainer.appendChild(productImage);
       productImage.id = products[i];
       productImage.className = 'productImage';
-      productImage.src = 'assets/' + products[i] + 'Small.jpg';
+      productImage.src = 'assets/' + products[i] + 'Large.jpg';
     }
   }
 }
 
 
 view.setUpEventListeners();
+view.clickLink();
 view.createImages();
